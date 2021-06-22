@@ -13,16 +13,14 @@ async function run() {
   try {
     core.info(`Starting Markdown reading time ...`)
     const { content: manifest } = await fetchDocsManifest(manifestPath)
-    console.log(manifest, 'manifest')
     const routesWithReadingTime = await calculateRoutesReadingTime(
       manifest.routes
     )
-
+    core.info(manifest)
     const newManifest = await updateManifestRoutes(
       manifest,
       routesWithReadingTime
     )
-    console.log(newManifest)
     await writeFileAsync(manifestPath, newManifest)
     // toDo find the way to rewrite manifest.json
   } catch (error) {
