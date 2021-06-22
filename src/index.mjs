@@ -12,6 +12,7 @@ const writeFileAsync = promisify(writeFile)
 async function run() {
   try {
     core.info(`Starting Markdown reading time ...`)
+    core.debug(`Payload keys: ${manifestPath}`)
     const { content: manifest } = await fetchDocsManifest(manifestPath)
     // Debug log the payload.
     core.debug(`Payload keys: ${JSON.stringify(manifest.routes)}`)
