@@ -1,6 +1,5 @@
 require('./sourcemap-register.js')
-/******/
-;(() => {
+/******/ ;(() => {
   // webpackBootstrap
   /******/ var __webpack_modules__ = {
     /***/ 351: /***/ function (
@@ -2726,7 +2725,7 @@ require('./sourcemap-register.js')
     }
 
     async function getFile(file) {
-      let rawUrl = file.raw_url.replace(
+      let rawUrl = file.replace(
         'https://github.com',
         'https://raw.githubusercontent.com'
       )
@@ -2773,16 +2772,20 @@ require('./sourcemap-register.js')
     async function run() {
       try {
         core.info(`Starting Markdown reading time ...`)
+        core.debug(`Payload keys: ${manifestPath}`)
         const { content: manifest } = await fetchDocsManifest(manifestPath)
+        // Debug log the payload.
+        core.debug(`Payload keys: ${JSON.stringify(manifest.routes)}`)
         const routesWithReadingTime = await calculateRoutesReadingTime(
           manifest.routes
         )
+        // Debug log the payload.
+        core.debug(`Payload keys: ${Object.keys(manifest)}`)
 
         const newManifest = await updateManifestRoutes(
           manifest,
           routesWithReadingTime
         )
-        console.log(newManifest)
         await writeFileAsync(manifestPath, newManifest)
         // toDo find the way to rewrite manifest.json
       } catch (error) {
