@@ -16,7 +16,9 @@ async function run() {
     const routesWithReadingTime = await calculateRoutesReadingTime(
       manifest.routes
     )
-    core.info(manifest)
+    // Debug log the payload.
+    core.debug(`Payload keys: ${Object.keys(manifest)}`)
+
     const newManifest = await updateManifestRoutes(
       manifest,
       routesWithReadingTime
