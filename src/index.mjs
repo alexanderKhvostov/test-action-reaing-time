@@ -13,7 +13,7 @@ import getFiles from './getFiles.mjs'
 async function run() {
   try {
     core.info(`Starting Markdown reading time ...`)
-    core.debug('token', process.env.GITHUB_TOKEN)
+    core.info(process.env.GITHUB_TOKEN)
     const files = getFiles()
     // Debug log the payload.
     core.debug(`Payload keys: ${JSON.stringify(files)}`)
