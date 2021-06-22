@@ -34,7 +34,7 @@ export async function getRawFileFromGitHub(path) {
 }
 
 export async function getFile(file) {
-  let rawUrl = file.raw_url.replace(
+  let rawUrl = file.replace(
     'https://github.com',
     'https://raw.githubusercontent.com'
   )
