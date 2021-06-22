@@ -1,4 +1,5 @@
 import fetch from 'node-fetch'
+const RAW_GITHUB_URL = 'https://raw.githubusercontent.com'
 
 function getErrorText(res) {
   try {
@@ -28,7 +29,7 @@ export async function getRawFileFromGitHub(path) {
     }
   }
   // eslint-disable-next-line no-undef
-  const res = await fetch(path, options)
+  const res = await fetch(RAW_GITHUB_URL + path, options)
   if (res.ok) return res.text()
   throw await getError(res, path)
 }

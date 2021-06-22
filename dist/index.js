@@ -2691,6 +2691,8 @@ require('./sourcemap-register.js')
     const external_util_namespaceObject = require('util')
     // EXTERNAL MODULE: ./node_modules/node-fetch/lib/index.js
     var lib = __nccwpck_require__(467) // CONCATENATED MODULE: ./src/github.mjs
+    const RAW_GITHUB_URL = 'https://raw.githubusercontent.com'
+
     function getErrorText(res) {
       try {
         return res.text()
@@ -2719,7 +2721,7 @@ require('./sourcemap-register.js')
         }
       }
       // eslint-disable-next-line no-undef
-      const res = await lib(path, options)
+      const res = await lib(RAW_GITHUB_URL + path, options)
       if (res.ok) return res.text()
       throw await getError(res, path)
     }
