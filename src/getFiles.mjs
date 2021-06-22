@@ -5,14 +5,12 @@ import globToRegExp from 'glob-to-regexp'
 
 export default async function getFiles() {
   const context = github.context
-  const pullNumber = context.payload.pull_request?.number
   const includes = core.getInput('includes')
   const excludes = core.getInput('excludes')
 
   const octokit = github.getOctokit(process.env.GITHUB_TOKEN)
   const { data: list } = await octokit.pulls.listFiles({
-    ...context.repo,
-    pull_number: pullNumber
+    ...context.repo
   })
 
   const mdx = list.filter((f) => {
