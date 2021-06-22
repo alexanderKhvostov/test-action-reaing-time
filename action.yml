@@ -1,0 +1,13 @@
+branding:
+  color: green
+  icon: check-square
+description: 'Calculate docs reading time in minutes'
+inputs:
+  includes:
+    description: Glob to include specific files or folders
+    required: false
+    default: '{*.md,*.mdx. *.json}'
+name: Calcilate docs reading time
+runs:
+  main: dist/index.js
+  using: node12

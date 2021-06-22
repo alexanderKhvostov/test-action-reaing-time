@@ -1,0 +1,83 @@
+{
+  "name": "reading-time-check",
+  "version": "1.0.0",
+  "private": true,
+  "description": "GitHub Action to calculate reading time of Markdown files and add it to a manifest",
+  "keywords": [
+    "reading time",
+    "manifest",
+    "docs",
+    "calculate"
+  ],
+  "homepage": "https://github.com/zentered/reading-time-to-manifest#readme",
+  "bugs": {
+    "url": "https://github.com/zentered/reading-time-to-manifest/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zentered/reading-time-to-manifest.git"
+  },
+  "license": "MIT",
+  "author": "Zentered <hi@zentered.co> (https://zentered.co)",
+  "contributors": [
+    "Patrick Heneise (https://github.com/patrickheneise)"
+  ],
+  "main": "dist/index.js",
+  "scripts": {
+    "all": "npm run lint && npm run test && npm run prepare",
+    "postinstall": "husky install",
+    "lint": "eslint .",
+    "prepare": "ncc build src/index.mjs -o dist --source-map --license licenses.txt",
+    "prepublishOnly": "pinst --disable",
+    "postpublish": "pinst --enable",
+    "test": "jest"
+  },
+  "commitlint": {
+    "extends": [
+      "@commitlint/config-conventional"
+    ]
+  },
+  "lint-staged": {
+    "*.{mjs,js,json,md,yml}": [
+      "prettier --write"
+    ],
+    "*.{mjs,js}": [
+      "eslint --cache --fix"
+    ]
+  },
+  "dependencies": {
+    "@actions/core": "^1.4.0",
+    "@actions/github": "^4.0.0",
+    "@octokit/action": "^3.10.1",
+    "glob-to-regexp": "^0.4.1",
+    "gray-matter": "^4.0.3",
+    "node-fetch": "^2.6.1",
+    "reading-time": "^1.3.0",
+    "toml": "^3.0.0"
+  },
+  "devDependencies": {
+    "@babel/preset-env": "^7.14.5",
+    "@commitlint/config-conventional": "^12.1.4",
+    "@vercel/ncc": "^0.28.6",
+    "babel-jest": "^26.6.3",
+    "commitlint": "^12.1.4",
+    "dotenv": "^8.6.0",
+    "eslint": "^7.28.0",
+    "eslint-plugin-jest": "^24.3.6",
+    "eslint-plugin-node": "^11.1.0",
+    "husky": "^6.0.0",
+    "jest": "^26.6.3",
+    "jest-config": "^26.6.3",
+    "lint-staged": "^10.5.4",
+    "pinst": "^2.1.6",
+    "prettier": "^2.3.1"
+  },
+  "engines": {
+    "node": "12"
+  },
+  "release": {
+    "branches": [
+      "main"
+    ]
+  }
+}
