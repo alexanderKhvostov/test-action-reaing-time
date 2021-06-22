@@ -6,7 +6,7 @@ inputs:
   includes:
     description: Glob to include specific files or folders
     required: false
-    default: '{*.md,*.mdx. *.json}'
+    default: '{*.md,*.mdx.,*.json}'
 name: Calcilate docs reading time
 runs:
   main: dist/index.js
