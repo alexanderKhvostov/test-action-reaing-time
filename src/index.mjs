@@ -13,6 +13,7 @@ async function run() {
   try {
     core.info(`Starting Markdown reading time ...`)
     const { content: manifest } = await fetchDocsManifest(manifestPath)
+    console.log(manifest, 'manifest')
     const routesWithReadingTime = await calculateRoutesReadingTime(
       manifest.routes
     )
