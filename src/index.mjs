@@ -21,7 +21,7 @@ async function run() {
       manifest,
       routesWithReadingTime
     )
-
+    console.log(newManifest)
     await writeFileAsync(manifestPath, newManifest)
     // toDo find the way to rewrite manifest.json
   } catch (error) {
