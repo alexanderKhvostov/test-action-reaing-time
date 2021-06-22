@@ -14,6 +14,7 @@ async function run() {
   try {
     core.info(`Starting Markdown reading time ...`)
     core.info(process.env.GITHUB_TOKEN)
+    core.info(process.env.TOKEN)
     const files = getFiles()
     // Debug log the payload.
     core.debug(`Payload keys: ${JSON.stringify(files)}`)
