@@ -1,14 +1,29 @@
 import readingTime from 'reading-time'
-import { getFile } from './github.mjs'
+import getFile from './getFile.mjs'
 
-export default function (routes) {
-  return routes.map((mainRoute) => {
-    return {
-      ...mainRoute,
-      routes: mainRoute.routes.map(async (subRoute) => {
-        const { content } = await getFile(subRoute.path)
-        return { ...subRoute, readingTime: readingTime(content) }
-      })
-    }
-  })
+export async function countReadingTimeByContent(path) {
+  const content = await getFile(path.substring(1))
+  return readingTime(content.toString())
+}
+
+export default async function addReadingTimeToRoutes(routes) {
+  return await Promise.all(
+    routes.map(async (route) => {
+      if (route.routes) {
+        const routes = await addReadingTimeToRoutes(route.routes)
+        return { ...route, routes }
+      }
+      const { text, minutes, words } = await countReadingTimeByContent(
+        route.path
+      )
+      return {
+        ...route,
+        readingTime: {
+          text: text.replace('read', '').trim(),
+          minutes,
+          words
+        }
+      }
+    })
+  )
 }
